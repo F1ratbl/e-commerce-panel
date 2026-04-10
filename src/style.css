@@ -1,0 +1,222 @@
+/* ===== Global Styles ===== */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  opacity: 0;
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.4s ease-out forwards;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.4s ease-out forwards;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+.sidebar .store-icon {
+  transition: transform 0.3s ease;
+}
+
+.sidebar .store-icon:hover {
+  transform: rotate(-8deg) scale(1.05);
+}
+
+.sidebar-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 60%;
+  background: currentColor;
+  border-radius: 0 4px 4px 0;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-link.active::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+/* ===== Drop Zone ===== */
+#drop-zone.drag-over {
+  border-color: #3755c3;
+  background-color: rgba(55, 85, 195, 0.04);
+  transform: scale(1.01);
+}
+
+#drop-zone.drag-over .material-symbols-outlined {
+  animation: bounceIn 0.3s ease-out;
+}
+
+/* ===== Toggle Switch ===== */
+#toggle-low-stock[data-active="false"] {
+  background-color: #c6c6cd;
+}
+
+#toggle-low-stock[data-active="false"] .toggle-dot {
+  right: auto;
+  left: 4px;
+}
+
+#toggle-low-stock[data-active="true"] .toggle-dot {
+  right: 4px;
+  left: auto;
+}
+
+/* ===== Color Swatches ===== */
+.color-swatch.active {
+  ring: 2px solid;
+}
+
+/* ===== Toast Notifications ===== */
+.toast {
+  pointer-events: auto;
+  animation: toastIn 0.3s ease-out forwards;
+  backdrop-filter: blur(12px);
+}
+
+.toast.toast-exit {
+  animation: toastOut 0.25s ease-in forwards;
+}
+
+/* ===== Editor Toolbar Buttons ===== */
+.editor-btn.active {
+  background-color: rgba(55, 85, 195, 0.1);
+  color: #3755c3;
+}
+
+/* ===== Scrollbar Styling ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c6c6cd;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #76777d;
+}
+
+/* ===== Focus Visible ===== */
+*:focus-visible {
+  outline: 2px solid #3755c3;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===== Section Hover Glow ===== */
+section:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 60;
+    /* Added shadow when open */
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  main {
+    margin-left: 0 !important;
+  }
+}

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Orders Management | SellerCentral</title>
+  <meta name="description" content="SellerCentral - Manage and track all your orders, fulfillment status, and customer transactions." />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-on-surface": "#eff1f3",
+            "tertiary-container": "#002113",
+            "secondary-container": "#d0e1fb",
+            "surface": "#f7f9fb",
+            "surface-bright": "#f7f9fb",
+            "surface-container-highest": "#e0e3e5",
+            "on-tertiary-fixed-variant": "#005236",
+            "outline": "#76777d",
+            "primary-fixed-dim": "#b8c4ff",
+            "on-tertiary-fixed": "#002113",
+            "surface-container-high": "#e6e8ea",
+            "surface-container-low": "#f2f4f6",
+            "on-secondary-container": "#54647a",
+            "background": "#f7f9fb",
+            "on-primary-fixed-variant": "#173bab",
+            "surface-variant": "#e0e3e5",
+            "secondary": "#505f76",
+            "on-surface-variant": "#45464d",
+            "secondary-fixed": "#d3e4fe",
+            "primary-fixed": "#dde1ff",
+            "on-error-container": "#93000a",
+            "on-primary-fixed": "#001453",
+            "on-secondary-fixed-variant": "#38485d",
+            "tertiary": "#000000",
+            "error-container": "#ffdad6",
+            "primary": "#000000",
+            "primary-container": "#001453",
+            "surface-tint": "#3755c3",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed-dim": "#4edea3",
+            "secondary-fixed-dim": "#b7c8e1",
+            "inverse-surface": "#2d3133",
+            "on-error": "#ffffff",
+            "on-surface": "#191c1e",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff",
+            "surface-dim": "#d8dadc",
+            "inverse-primary": "#b8c4ff",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#6ffbbe",
+            "on-background": "#191c1e",
+            "outline-variant": "#c6c6cd",
+            "on-primary-container": "#607cec",
+            "on-tertiary-container": "#009668",
+            "on-secondary-fixed": "#0b1c30",
+            "surface-container": "#eceef0",
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
+          },
+          fontFamily: {
+            headline: ["Inter"],
+            body: ["Inter"],
+            label: ["Inter"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="/src/style.css" />
+  <style>
+    .tnum { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body class="overflow-x-hidden bg-surface text-on-surface antialiased">
+
+  <!-- TopNavBar -->
+  <header id="top-navbar" class="bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-md text-slate-900 dark:text-slate-50 font-inter antialiased shadow-sm dark:shadow-none sticky top-0 z-50 flex justify-between items-center h-16 px-4 md:px-6 w-full transition-all duration-300">
+    <div class="flex items-center gap-3 md:gap-8">
+      <button id="mobile-menu-btn" class="md:hidden p-2 -ml-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <span class="text-lg md:text-xl font-bold tracking-tighter text-slate-900 dark:text-white cursor-pointer hover:opacity-80 transition-opacity">SellerCentral</span>
+      <div class="hidden md:flex items-center gap-1">
+        <a id="nav-inventory" class="nav-link text-slate-950 dark:text-white font-semibold border-b-2 border-slate-900 dark:border-white px-3 py-2" href="#">Inventory</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <!-- SideNavBar -->
+    <aside id="sidebar" class="sidebar bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-inter text-sm font-medium bottom-0 w-64 fixed left-0 top-16 z-[60] flex flex-col p-4 gap-2 transition-all duration-300">
+      <div class="flex items-center gap-3 px-2 py-4 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary store-icon">
+          <span class="material-symbols-outlined">storefront</span>
+        </div>
+        <div>
+          <h2 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Precision Retail</h2>
+          <p class="text-xs text-on-surface-variant opacity-70">Verified Merchant</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 space-y-1 overflow-y-auto no-scrollbar">
+        <p class="px-3 pt-1 pb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Main</p>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg" href="/">
+          <span class="material-symbols-outlined">inventory_2</span> Products
+        </a>
+        <a class="sidebar-link flex items-center justify-between px-3 py-2 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg active" href="/orders.html">
+          <span class="flex items-center gap-3"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span> Orders</span>
+          <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full min-w-[20px] text-center">142</span>
+        </a>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg" href="/customers.html">
+          <span class="material-symbols-outlined">group</span> Customers
+        </a>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg" href="/payments.html">
+          <span class="material-symbols-outlined">payments</span> Payments
+        </a>
+
+        <div class="pt-4 pb-1">
+          <p class="px-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Insights</p>
+        </div>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg" href="/analytics.html">
+          <span class="material-symbols-outlined">monitoring</span> Analytics
+        </a>
+      </nav>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-0 md:ml-64 p-4 md:p-8 min-h-screen">
+      <div class="max-w-[1400px] mx-auto">
+
+        <!-- Header Section -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 animate-fade-in">
+          <div>
+            <nav class="flex items-center gap-2 text-xs text-on-surface-variant mb-2">
+              <span class="hover:underline cursor-pointer hover:text-on-surface transition-colors">Management</span>
+              <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+              <span class="font-semibold text-on-surface">Orders</span>
+            </nav>
+            <h1 class="text-3xl font-extrabold tracking-tight text-on-surface mb-1">Orders Management</h1>
+            <p class="text-on-surface-variant font-medium">Oversee your global sales and fulfillment status.</p>
+          </div>
+          <div class="flex gap-3">
+            <button id="btn-export" class="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant/30 text-on-surface text-sm font-semibold rounded-lg hover:bg-surface-container transition-colors active:scale-[0.97]">
+              <span class="material-symbols-outlined text-lg">file_download</span> Export CSV
+            </button>
+            <button id="btn-create-order" class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary text-sm font-semibold rounded-lg hover:bg-slate-800 transition-colors shadow-sm active:scale-[0.97]">
+              <span class="material-symbols-outlined text-lg">add</span> Create Order
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.05s;">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-primary/5 rounded-lg">
+                <span class="material-symbols-outlined text-primary">shopping_bag</span>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-on-tertiary-container bg-tertiary-fixed px-2 py-0.5 rounded-full">+12.5%</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Total Orders</p>
+            <h3 class="text-2xl font-black tnum">2,840</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden">
+              <div class="bg-primary h-full w-3/4 transition-all duration-1000"></div>
+            </div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-amber-50 rounded-lg">
+                <span class="material-symbols-outlined text-amber-600">pending_actions</span>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">Active</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Pending Fulfillment</p>
+            <h3 class="text-2xl font-black tnum">142</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden">
+              <div class="bg-amber-500 h-full w-1/4 transition-all duration-1000"></div>
+            </div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.15s;">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-blue-50 rounded-lg">
+                <span class="material-symbols-outlined text-blue-600">local_shipping</span>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">Transit</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Shipped Today</p>
+            <h3 class="text-2xl font-black tnum">56</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden">
+              <div class="bg-blue-500 h-full w-2/3 transition-all duration-1000"></div>
+            </div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-red-50 rounded-lg">
+                <span class="material-symbols-outlined text-red-600">cancel</span>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-red-700 bg-red-100 px-2 py-0.5 rounded-full">-2%</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Cancelled Orders</p>
+            <h3 class="text-2xl font-black tnum">12</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden">
+              <div class="bg-red-500 h-full w-[5%] transition-all duration-1000"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="bg-surface-container-low p-4 rounded-xl mb-6 flex flex-col md:flex-row gap-4 items-center animate-slide-up" style="animation-delay: 0.25s;">
+          <div class="flex-1 w-full relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined">search</span>
+            <input id="order-search" class="w-full bg-surface-container-lowest border-none py-2.5 pl-10 pr-4 rounded-lg text-sm focus:ring-2 focus:ring-surface-tint/20 transition-shadow" placeholder="Search by Order ID, Customer Name..." type="text" />
+          </div>
+          <div class="flex gap-3 w-full md:w-auto">
+            <div class="relative">
+              <select id="status-filter" class="appearance-none bg-surface-container-lowest border-none py-2.5 pl-4 pr-10 rounded-lg text-sm font-medium focus:ring-2 focus:ring-surface-tint/20 cursor-pointer min-w-[140px]">
+                <option>All Statuses</option>
+                <option>Processing</option>
+                <option>On Hold</option>
+                <option>Completed</option>
+                <option>Cancelled</option>
+              </select>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none material-symbols-outlined text-on-surface-variant">expand_more</span>
+            </div>
+            <button class="bg-surface-container-lowest py-2.5 px-4 rounded-lg text-sm font-medium flex items-center gap-2 hover:bg-white transition-colors border-none">
+              <span class="material-symbols-outlined text-lg">calendar_month</span>
+              <span>Last 30 Days</span>
+              <span class="material-symbols-outlined text-lg">expand_more</span>
+            </button>
+            <button class="bg-surface-container-highest p-2.5 rounded-lg flex items-center justify-center hover:bg-surface-variant transition-colors">
+              <span class="material-symbols-outlined">filter_list</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-6 animate-slide-up" style="animation-delay: 0.3s;">
+          <div class="overflow-x-auto">
+            <div class="w-full overflow-x-auto"><table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-surface-container-low/50">
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Order ID</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Customer</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Date</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Products</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Total</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Status</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-surface-variant/30">
+
+                <!-- Order Row 1 -->
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <span class="font-bold text-slate-900 tnum">#ORD-9421</span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <img alt="Elena Rodriguez" class="w-8 h-8 rounded-full object-cover border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCprx-xXIJdj8IRDzh4iwJm861lUuXPQtMVf8-SPnud_Hr-t0fHdq4f4JvXJUXfkSX8ZTuOXsT2kgcrSlwlJfd4eMLuj3BdN2iy9pIAVAlvvt2NyyFGjQcZcmGbnS-nHu7kVAH6nifzebz4SmLoazw2kkuiZF-EWatD6VNLTzi5N7jHAlClWSmiMVZxf7YYmELU1GXf-vnbsybZzcvQWrys77vbkt9k1-AEdk5L0dXURwaTaAwhDJTFIGa-xAzTQFUyoYNTnJMVWXQ" />
+                      <div>
+                        <p class="text-sm font-bold text-on-surface">Elena Rodriguez</p>
+                        <p class="text-[11px] text-on-surface-variant">elena.r@example.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-sm font-medium text-on-surface-variant tnum">Oct 24, 2023</td>
+                  <td class="px-6 py-5">
+                    <div class="flex -space-x-2">
+                      <img alt="MacBook Pro" class="w-8 h-8 rounded-lg border-2 border-white object-cover" src="/images/macbook.png" />
+                      <img alt="Headphones" class="w-8 h-8 rounded-lg border-2 border-white object-cover" src="/images/headphones.png" />
+                      <div class="w-8 h-8 rounded-lg bg-surface-container border-2 border-white flex items-center justify-center text-[10px] font-bold">+1</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                      <span class="text-sm font-bold text-on-surface tnum">$842.00</span>
+                      <span class="text-[10px] font-medium text-blue-600 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">credit_card</span> Visa • 4242
+                      </span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700">
+                      <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                      Processing
+                    </span>
+                  </td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" title="View Details"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" title="Print Invoice"><span class="material-symbols-outlined text-lg">print</span></button>
+                      <button class="p-1.5 hover:bg-error/5 rounded-lg text-error transition-colors" title="Cancel Order"><span class="material-symbols-outlined text-lg">cancel</span></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Order Row 2 -->
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <span class="font-bold text-slate-900 tnum">#ORD-9420</span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <img alt="Marcus Chen" class="w-8 h-8 rounded-full object-cover border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWdvav96deTE0NTBxqwm6sSN7zV2NT-wbTGLpd9m2RsZzBuUocPhCUGIH9awpFexLSiWCgKdmWgdpYBw5b95Xv8xt63TLR4nI_hTTK-wocYbWentg97Tn99h6wyPKFo3hgYGCccHPcoRW_9VyhZWjY-Q-jz92wIFdTR6Yasjy5bxEyNHmlVS-PMolTgDPpi1B0HrTWasMeEjWgpURRwL7z2eAClu-4ChAmd4YvHlrFQjJW3c9kOp3mL8zgzS71biC5CLZKbnrEG0I" />
+                      <div>
+                        <p class="text-sm font-bold text-on-surface">Marcus Chen</p>
+                        <p class="text-[11px] text-on-surface-variant">m.chen@global.net</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-sm font-medium text-on-surface-variant tnum">Oct 24, 2023</td>
+                  <td class="px-6 py-5">
+                    <div class="flex -space-x-2">
+                      <img alt="Running Shoe" class="w-8 h-8 rounded-lg border-2 border-white object-cover" src="/images/shoe.png" />
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                      <span class="text-sm font-bold text-on-surface tnum">$120.50</span>
+                      <span class="text-[10px] font-medium text-slate-600 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">account_balance_wallet</span> PayPal
+                      </span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-on-tertiary-container/10 text-on-tertiary-container">
+                      <span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                      Completed
+                    </span>
+                  </td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-lg">print</span></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Order Row 3 -->
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <span class="font-bold text-slate-900 tnum">#ORD-9419</span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <img alt="Sarah Jenkins" class="w-8 h-8 rounded-full object-cover border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxYkOwDZFoOefCeBU-mdciNsd8NH6ZJnz1xeHRp6Lt_PJTsQOPX4ZFnLvLfbWG_s2pg0j5ixlZvlb2_HcKNQdc8JRv-Kd__UFu-9ETEklgIj0X8A8-36PC3lKPpdV1-YZCSjSXUs1nr45F4ZN3iADLvFSRnjAqOBHHRLYvO09oGJte7ZYqjuEmsuxNLY4B_mvR4W5p-K-ml-qXzg_1T10WIXYiYcnmOtQSZ5YXw1ZNwKkVo4PsVykv_buFHfHXCTcqJ2PxDEbdUY8" />
+                      <div>
+                        <p class="text-sm font-bold text-on-surface">Sarah Jenkins</p>
+                        <p class="text-[11px] text-on-surface-variant">s.jenkins@creative.co</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-sm font-medium text-on-surface-variant tnum">Oct 23, 2023</td>
+                  <td class="px-6 py-5">
+                    <div class="flex -space-x-2">
+                      <img alt="Leather Journal" class="w-8 h-8 rounded-lg border-2 border-white object-cover" src="/images/journal.png" />
+                      <div class="w-8 h-8 rounded-lg bg-surface-container border-2 border-white flex items-center justify-center text-[10px] font-bold">+4</div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                      <span class="text-sm font-bold text-on-surface tnum">$2,150.00</span>
+                      <span class="text-[10px] font-medium text-blue-600 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">credit_card</span> Amex • 1007
+                      </span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                      On Hold
+                    </span>
+                  </td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-lg">print</span></button>
+                      <button class="p-1.5 hover:bg-error/5 rounded-lg text-error transition-colors"><span class="material-symbols-outlined text-lg">cancel</span></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Order Row 4 -->
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <span class="font-bold text-slate-900 tnum">#ORD-9418</span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <img alt="Alex Thompson" class="w-8 h-8 rounded-full object-cover border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7ilZOXV0eevKAVkqtjF2sUprBLBKCMupQsLl9dQRLXU2Eu7QwHncYDjUysr22xDulGZ0X5GLkgH-9mQf6kAXC6IYn5dUh2aDH4IfEP9bpuA83RAsyj2ib8L4udvmhCCAtxe8iEWg_MCjyUASUROOPt2rvcXmi6JuRNY2jqAzKVGAqzGvE-vv8elP_ChamQivA65-eu7Cf2_ZAQm3UcNuskda5-WR4JiJkGv7RM8XZkZ9SUtNdWrescMiPggZkqF9bNSRy3tQx1IQ" />
+                      <div>
+                        <p class="text-sm font-bold text-on-surface">Alex Thompson</p>
+                        <p class="text-[11px] text-on-surface-variant">alex.t@outlook.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5 text-sm font-medium text-on-surface-variant tnum">Oct 23, 2023</td>
+                  <td class="px-6 py-5">
+                    <div class="flex -space-x-2">
+                      <img alt="MacBook Pro" class="w-8 h-8 rounded-lg border-2 border-white object-cover" src="/images/laptop.png" />
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                      <span class="text-sm font-bold text-on-surface tnum">$45.00</span>
+                      <span class="text-[10px] font-medium text-slate-600 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">credit_card</span> MC • 8812
+                      </span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-red-50 text-red-700">
+                      <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+                      Cancelled
+                    </span>
+                  </td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table></div>
+          </div>
+
+          <!-- Pagination Footer -->
+          <div class="px-6 py-4 flex items-center justify-between border-t border-surface-variant/30 bg-surface-container-low/20">
+            <p class="text-xs font-medium text-on-surface-variant">
+              Showing <span class="text-on-surface font-bold tnum">1</span> to <span class="text-on-surface font-bold tnum">10</span> of <span class="text-on-surface font-bold tnum">2,840</span> results
+            </p>
+            <div class="flex items-center gap-2">
+              <button class="p-1.5 rounded-lg border border-outline-variant/30 text-on-surface-variant hover:bg-white transition-colors disabled:opacity-50" disabled>
+                <span class="material-symbols-outlined text-lg">chevron_left</span>
+              </button>
+              <button class="w-8 h-8 rounded-lg bg-primary text-on-primary text-xs font-bold shadow-sm">1</button>
+              <button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface-variant text-xs font-bold transition-colors">2</button>
+              <button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface-variant text-xs font-bold transition-colors">3</button>
+              <span class="text-on-surface-variant px-1">...</span>
+              <button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface-variant text-xs font-bold transition-colors">284</button>
+              <button class="p-1.5 rounded-lg border border-outline-variant/30 text-on-surface-variant hover:bg-white transition-colors">
+                <span class="material-symbols-outlined text-lg">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Grid: Insights + Export Summary -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-slide-up" style="animation-delay: 0.35s;">
+          <div class="lg:col-span-2 bg-surface-container-low/50 border border-dashed border-outline-variant/50 rounded-2xl flex items-center justify-center p-12 text-center">
+            <div>
+              <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                <span class="material-symbols-outlined text-3xl text-outline">analytics</span>
+              </div>
+              <h4 class="text-sm font-bold text-on-surface mb-2">Detailed Fulfillment Insights</h4>
+              <p class="text-xs text-on-surface-variant max-w-xs mx-auto">Select any order row to see real-time logistics tracking and customer communication history here.</p>
+            </div>
+          </div>
+          <div class="bg-surface-container-highest p-6 rounded-2xl flex flex-col justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-on-surface mb-4">Export Summary</h4>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs text-on-surface-variant">Last Export</span>
+                  <span class="text-xs font-bold text-on-surface">2 hours ago</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs text-on-surface-variant">Format</span>
+                  <span class="text-xs font-bold text-on-surface">CSV (Excel Ready)</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs text-on-surface-variant">Recipient</span>
+                  <span class="text-xs font-bold text-on-surface">warehouse@global.co</span>
+                </div>
+              </div>
+            </div>
+            <button class="w-full mt-6 py-2.5 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[11px] font-black uppercase tracking-widest rounded-lg hover:brightness-95 transition-all">
+              Schedule Auto-Export
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-20 right-6 z-[100] space-y-3 pointer-events-none"></div>
+
+  <script type="module" src="/src/orders.js"></script>
+</body>
+</html>

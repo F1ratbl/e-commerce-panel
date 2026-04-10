@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Customers | SellerCentral</title>
+  <meta name="description" content="SellerCentral - Manage your customer base, segments, and lifetime value insights." />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-on-surface": "#eff1f3", "tertiary-container": "#002113", "secondary-container": "#d0e1fb",
+            "surface": "#f7f9fb", "surface-bright": "#f7f9fb", "surface-container-highest": "#e0e3e5",
+            "on-tertiary-fixed-variant": "#005236", "outline": "#76777d", "primary-fixed-dim": "#b8c4ff",
+            "on-tertiary-fixed": "#002113", "surface-container-high": "#e6e8ea", "surface-container-low": "#f2f4f6",
+            "on-secondary-container": "#54647a", "background": "#f7f9fb", "on-primary-fixed-variant": "#173bab",
+            "surface-variant": "#e0e3e5", "secondary": "#505f76", "on-surface-variant": "#45464d",
+            "secondary-fixed": "#d3e4fe", "primary-fixed": "#dde1ff", "on-error-container": "#93000a",
+            "on-primary-fixed": "#001453", "on-secondary-fixed-variant": "#38485d", "tertiary": "#000000",
+            "error-container": "#ffdad6", "primary": "#000000", "primary-container": "#001453",
+            "surface-tint": "#3755c3", "surface-container-lowest": "#ffffff", "tertiary-fixed-dim": "#4edea3",
+            "secondary-fixed-dim": "#b7c8e1", "inverse-surface": "#2d3133", "on-error": "#ffffff",
+            "on-surface": "#191c1e", "error": "#ba1a1a", "on-primary": "#ffffff", "surface-dim": "#d8dadc",
+            "inverse-primary": "#b8c4ff", "on-secondary": "#ffffff", "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#6ffbbe", "on-background": "#191c1e", "outline-variant": "#c6c6cd",
+            "on-primary-container": "#607cec", "on-tertiary-container": "#009668", "on-secondary-fixed": "#0b1c30",
+            "surface-container": "#eceef0",
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          fontFamily: { headline: ["Inter"], body: ["Inter"], label: ["Inter"] },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="/src/style.css" />
+  <style>.tnum { font-variant-numeric: tabular-nums; }</style>
+</head>
+<body class="overflow-x-hidden bg-surface text-on-surface antialiased">
+
+  <!-- TopNavBar -->
+  <header id="top-navbar" class="bg-slate-50/70 backdrop-blur-md text-slate-900 font-inter antialiased shadow-sm sticky top-0 z-50 flex justify-between items-center h-16 px-4 md:px-4 md:px-6 w-full transition-all duration-300">
+    <div class="flex items-center gap-3 md:gap-3 md:gap-8">
+      <button id="mobile-menu-btn" class="md:hidden p-2 -ml-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <span class="text-lg md:text-xl font-bold tracking-tighter cursor-pointer hover:opacity-80 transition-opacity">SellerCentral</span>
+      <div class="hidden md:flex items-center gap-1">
+        <a id="nav-inventory" class="nav-link text-slate-950 dark:text-white font-semibold border-b-2 border-slate-900 dark:border-white px-3 py-2" href="#">Inventory</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <!-- SideNavBar -->
+    <aside class="sidebar bg-slate-100 text-slate-900 font-inter text-sm font-medium bottom-0 w-64 fixed left-0 top-16 z-[60] flex flex-col p-4 gap-2">
+      <div class="flex items-center gap-3 px-2 py-4 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary"><span class="material-symbols-outlined">storefront</span></div>
+        <div>
+          <h2 class="text-lg font-black leading-tight">Precision Retail</h2>
+          <p class="text-xs text-on-surface-variant opacity-70">Verified Merchant</p>
+        </div>
+      </div>
+      <nav class="flex-1 space-y-1 overflow-y-auto no-scrollbar">
+        <p class="px-3 pt-1 pb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Main</p>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all rounded-lg" href="/"><span class="material-symbols-outlined">inventory_2</span> Products</a>
+        <a class="sidebar-link flex items-center justify-between px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all rounded-lg" href="/orders.html">
+          <span class="flex items-center gap-3"><span class="material-symbols-outlined">shopping_cart</span> Orders</span>
+          <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full min-w-[20px] text-center">142</span>
+        </a>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 bg-slate-200 text-slate-900 rounded-lg active" href="/customers.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span> Customers</a>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all rounded-lg" href="/payments.html"><span class="material-symbols-outlined">payments</span> Payments</a>
+
+        <div class="pt-4 pb-1"><p class="px-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Insights</p></div>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all rounded-lg" href="/analytics.html"><span class="material-symbols-outlined">monitoring</span> Analytics</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-0 md:ml-64 p-4 md:p-4 md:p-8 min-h-screen">
+      <div class="max-w-[1400px] mx-auto">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 animate-fade-in">
+          <div>
+            <nav class="flex items-center gap-2 text-xs text-on-surface-variant mb-2">
+              <span class="hover:underline cursor-pointer">Management</span>
+              <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+              <span class="font-semibold text-on-surface">Customers</span>
+            </nav>
+            <h1 class="text-3xl font-extrabold tracking-tight mb-1">Customers</h1>
+            <p class="text-on-surface-variant font-medium">Manage your customer base, segments, and engagement.</p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant/30 text-sm font-semibold rounded-lg hover:bg-surface-container transition-colors">
+              <span class="material-symbols-outlined text-lg">filter_list</span> Segments
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary text-sm font-semibold rounded-lg hover:bg-slate-800 shadow-sm transition-colors">
+              <span class="material-symbols-outlined text-lg">person_add</span> Add Customer
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow animate-slide-up" style="animation-delay:.05s">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-primary/5 rounded-lg"><span class="material-symbols-outlined text-primary">group</span></div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">+9.3%</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Total Customers</p>
+            <h3 class="text-2xl font-black tnum">4,218</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden"><div class="bg-primary h-full w-[78%]"></div></div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow animate-slide-up" style="animation-delay:.1s">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-emerald-50 rounded-lg"><span class="material-symbols-outlined text-emerald-600">person_add</span></div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">+14.2%</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">New This Month</p>
+            <h3 class="text-2xl font-black tnum">342</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[45%]"></div></div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow animate-slide-up" style="animation-delay:.15s">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-violet-50 rounded-lg"><span class="material-symbols-outlined text-violet-600">loyalty</span></div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-violet-700 bg-violet-100 px-2 py-0.5 rounded-full">VIP</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Repeat Buyers</p>
+            <h3 class="text-2xl font-black tnum">1,847</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden"><div class="bg-violet-500 h-full w-[62%]"></div></div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow animate-slide-up" style="animation-delay:.2s">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-amber-50 rounded-lg"><span class="material-symbols-outlined text-amber-600">attach_money</span></div>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Avg. Lifetime Value</p>
+            <h3 class="text-2xl font-black tnum">$284.50</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden"><div class="bg-amber-500 h-full w-[58%]"></div></div>
+          </div>
+        </div>
+
+        <!-- Customers Table -->
+        <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-8 animate-slide-up" style="animation-delay:.25s">
+          <!-- Search & Filter -->
+          <div class="p-4 border-b border-surface-variant/30 flex flex-col md:flex-row gap-4 items-center">
+            <div class="flex-1 w-full relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined">search</span>
+              <input class="w-full bg-surface-container-low border-none py-2.5 pl-10 pr-4 rounded-lg text-sm focus:ring-2 focus:ring-surface-tint/20" placeholder="Search by name, email, or phone..." type="text" />
+            </div>
+            <div class="flex gap-3">
+              <select class="appearance-none bg-surface-container-low border-none py-2.5 pl-4 pr-10 rounded-lg text-sm font-medium cursor-pointer min-w-[140px]">
+                <option>All Segments</option><option>VIP</option><option>Regulars</option><option>New</option><option>At Risk</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <div class="w-full overflow-x-auto"><table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-surface-container-low/50">
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Customer</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Segment</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Orders</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Total Spent</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Last Order</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant">Status</th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-surface-variant/30">
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white text-xs font-bold">ER</div>
+                      <div>
+                        <p class="text-sm font-bold">Elena Rodriguez</p>
+                        <p class="text-[11px] text-on-surface-variant">elena.r@example.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5"><span class="px-2 py-0.5 bg-violet-100 text-violet-700 text-[11px] font-bold rounded-full">VIP</span></td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">28</td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">$4,280.00</td>
+                  <td class="px-6 py-5 text-sm text-on-surface-variant tnum">Oct 24, 2023</td>
+                  <td class="px-6 py-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Active</span></td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">mail</span></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white text-xs font-bold">MC</div>
+                      <div>
+                        <p class="text-sm font-bold">Marcus Chen</p>
+                        <p class="text-[11px] text-on-surface-variant">m.chen@global.net</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[11px] font-bold rounded-full">Regular</span></td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">12</td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">$1,560.50</td>
+                  <td class="px-6 py-5 text-sm text-on-surface-variant tnum">Oct 24, 2023</td>
+                  <td class="px-6 py-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Active</span></td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">mail</span></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-xs font-bold">SJ</div>
+                      <div>
+                        <p class="text-sm font-bold">Sarah Jenkins</p>
+                        <p class="text-[11px] text-on-surface-variant">s.jenkins@creative.co</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5"><span class="px-2 py-0.5 bg-violet-100 text-violet-700 text-[11px] font-bold rounded-full">VIP</span></td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">34</td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">$6,420.00</td>
+                  <td class="px-6 py-5 text-sm text-on-surface-variant tnum">Oct 23, 2023</td>
+                  <td class="px-6 py-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Active</span></td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">mail</span></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-xs font-bold">AT</div>
+                      <div>
+                        <p class="text-sm font-bold">Alex Thompson</p>
+                        <p class="text-[11px] text-on-surface-variant">alex.t@outlook.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5"><span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-[11px] font-bold rounded-full">At Risk</span></td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">3</td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">$245.00</td>
+                  <td class="px-6 py-5 text-sm text-on-surface-variant tnum">Aug 12, 2023</td>
+                  <td class="px-6 py-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700"><span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>Inactive</span></td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">mail</span></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container-high/30 transition-colors group">
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center text-white text-xs font-bold">LW</div>
+                      <div>
+                        <p class="text-sm font-bold">Lisa Wang</p>
+                        <p class="text-[11px] text-on-surface-variant">lisa.wang@techcorp.io</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[11px] font-bold rounded-full">New</span></td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">1</td>
+                  <td class="px-6 py-5 text-sm font-bold tnum">$89.00</td>
+                  <td class="px-6 py-5 text-sm text-on-surface-variant tnum">Oct 22, 2023</td>
+                  <td class="px-6 py-5"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Active</span></td>
+                  <td class="px-6 py-5 text-right">
+                    <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                      <button class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant"><span class="material-symbols-outlined text-lg">mail</span></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table></div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="px-6 py-4 flex items-center justify-between border-t border-surface-variant/30 bg-surface-container-low/20">
+            <p class="text-xs font-medium text-on-surface-variant">Showing <span class="text-on-surface font-bold tnum">1</span> to <span class="text-on-surface font-bold tnum">5</span> of <span class="text-on-surface font-bold tnum">4,218</span> customers</p>
+            <div class="flex items-center gap-2">
+              <button class="p-1.5 rounded-lg border border-outline-variant/30 text-on-surface-variant disabled:opacity-50" disabled><span class="material-symbols-outlined text-lg">chevron_left</span></button>
+              <button class="w-8 h-8 rounded-lg bg-primary text-on-primary text-xs font-bold shadow-sm">1</button>
+              <button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface-variant text-xs font-bold">2</button>
+              <button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface-variant text-xs font-bold">3</button>
+              <span class="text-on-surface-variant px-1">...</span>
+              <button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface-variant text-xs font-bold">844</button>
+              <button class="p-1.5 rounded-lg border border-outline-variant/30 text-on-surface-variant hover:bg-white"><span class="material-symbols-outlined text-lg">chevron_right</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom: Segment Breakdown + Engagement -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm animate-slide-up" style="animation-delay:.3s">
+            <h3 class="text-sm font-bold mb-4">Customer Segments</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3 p-3 bg-violet-50/50 rounded-xl">
+                <div class="w-3 h-3 rounded-full bg-violet-500"></div>
+                <div class="flex-1"><p class="text-xs font-bold">VIP Customers</p><p class="text-[10px] text-on-surface-variant">25+ orders, $2K+ spent</p></div>
+                <span class="text-sm font-black tnum">486</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl">
+                <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                <div class="flex-1"><p class="text-xs font-bold">Regular Buyers</p><p class="text-[10px] text-on-surface-variant">5–24 orders</p></div>
+                <span class="text-sm font-black tnum">1,361</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-emerald-50/50 rounded-xl">
+                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                <div class="flex-1"><p class="text-xs font-bold">New Customers</p><p class="text-[10px] text-on-surface-variant">1–4 orders, last 60 days</p></div>
+                <span class="text-sm font-black tnum">1,829</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-amber-50/50 rounded-xl">
+                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                <div class="flex-1"><p class="text-xs font-bold">At Risk</p><p class="text-[10px] text-on-surface-variant">No orders in 90+ days</p></div>
+                <span class="text-sm font-black tnum">542</span>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-sm animate-slide-up" style="animation-delay:.35s">
+            <h3 class="text-sm font-bold mb-1">Customer Acquisition</h3>
+            <p class="text-xs text-on-surface-variant mb-6">New customers per month — last 8 months</p>
+            <div class="flex items-end gap-3 h-40 px-2">
+              <div class="flex-1 flex flex-col items-center"><div class="w-full rounded-t-lg bg-primary/70" style="height:50%"></div><span class="text-[10px] text-on-surface-variant mt-2">Mar</span></div>
+              <div class="flex-1 flex flex-col items-center"><div class="w-full rounded-t-lg bg-primary/70" style="height:58%"></div><span class="text-[10px] text-on-surface-variant mt-2">Apr</span></div>
+              <div class="flex-1 flex flex-col items-center"><div class="w-full rounded-t-lg bg-primary/70" style="height:45%"></div><span class="text-[10px] text-on-surface-variant mt-2">May</span></div>
+              <div class="flex-1 flex flex-col items-center"><div class="w-full rounded-t-lg bg-primary/70" style="height:70%"></div><span class="text-[10px] text-on-surface-variant mt-2">Jun</span></div>
+              <div class="flex-1 flex flex-col items-center"><div class="w-full rounded-t-lg bg-primary/70" style="height:65%"></div><span class="text-[10px] text-on-surface-variant mt-2">Jul</span></div>
+              <div class="flex-1 flex flex-col items-center"><div class="w-full rounded-t-lg bg-primary/80" style="height:80%"></div><span class="text-[10px] text-on-surface-variant mt-2">Aug</span></div>
+              <div class="flex-1 flex flex-col items-center"><div class="w-full rounded-t-lg bg-primary/80" style="height:75%"></div><span class="text-[10px] text-on-surface-variant mt-2">Sep</span></div>
+              <div class="flex-1 flex flex-col items-center"><div class="w-full rounded-t-lg bg-primary" style="height:95%"></div><span class="text-[10px] font-bold text-on-surface mt-2">Oct</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container" class="fixed top-20 right-6 z-[100] space-y-3 pointer-events-none"></div>
+  <script type="module" src="/src/orders.js"></script>
+</body>
+</html>

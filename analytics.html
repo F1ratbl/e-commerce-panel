@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Analytics | SellerCentral</title>
+  <meta name="description" content="SellerCentral - Advanced analytics dashboard for tracking revenue, traffic, and sales performance." />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-on-surface": "#eff1f3", "tertiary-container": "#002113", "secondary-container": "#d0e1fb",
+            "surface": "#f7f9fb", "surface-bright": "#f7f9fb", "surface-container-highest": "#e0e3e5",
+            "on-tertiary-fixed-variant": "#005236", "outline": "#76777d", "primary-fixed-dim": "#b8c4ff",
+            "on-tertiary-fixed": "#002113", "surface-container-high": "#e6e8ea", "surface-container-low": "#f2f4f6",
+            "on-secondary-container": "#54647a", "background": "#f7f9fb", "on-primary-fixed-variant": "#173bab",
+            "surface-variant": "#e0e3e5", "secondary": "#505f76", "on-surface-variant": "#45464d",
+            "secondary-fixed": "#d3e4fe", "primary-fixed": "#dde1ff", "on-error-container": "#93000a",
+            "on-primary-fixed": "#001453", "on-secondary-fixed-variant": "#38485d", "tertiary": "#000000",
+            "error-container": "#ffdad6", "primary": "#000000", "primary-container": "#001453",
+            "surface-tint": "#3755c3", "surface-container-lowest": "#ffffff", "tertiary-fixed-dim": "#4edea3",
+            "secondary-fixed-dim": "#b7c8e1", "inverse-surface": "#2d3133", "on-error": "#ffffff",
+            "on-surface": "#191c1e", "error": "#ba1a1a", "on-primary": "#ffffff", "surface-dim": "#d8dadc",
+            "inverse-primary": "#b8c4ff", "on-secondary": "#ffffff", "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#6ffbbe", "on-background": "#191c1e", "outline-variant": "#c6c6cd",
+            "on-primary-container": "#607cec", "on-tertiary-container": "#009668", "on-secondary-fixed": "#0b1c30",
+            "surface-container": "#eceef0",
+          },
+          borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          fontFamily: { headline: ["Inter"], body: ["Inter"], label: ["Inter"] },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="/src/style.css" />
+  <style>
+    .tnum { font-variant-numeric: tabular-nums; }
+    .bar { transition: height 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+    .line-dot { animation: dot-pulse 2s ease-in-out infinite; }
+    @keyframes dot-pulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+  </style>
+</head>
+<body class="overflow-x-hidden bg-surface text-on-surface antialiased">
+
+  <!-- TopNavBar -->
+  <header id="top-navbar" class="bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-md text-slate-900 dark:text-slate-50 font-inter antialiased shadow-sm sticky top-0 z-50 flex justify-between items-center h-16 px-4 md:px-6 w-full transition-all duration-300">
+    <div class="flex items-center gap-3 md:gap-8">
+      <button id="mobile-menu-btn" class="md:hidden p-2 -ml-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <span class="text-lg md:text-xl font-bold tracking-tighter text-slate-900 dark:text-white cursor-pointer hover:opacity-80 transition-opacity">SellerCentral</span>
+      <div class="hidden md:flex items-center gap-1">
+        <a id="nav-inventory" class="nav-link text-slate-950 dark:text-white font-semibold border-b-2 border-slate-900 dark:border-white px-3 py-2" href="#">Inventory</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <!-- SideNavBar -->
+    <aside class="sidebar bg-slate-100 text-slate-900 font-inter text-sm font-medium bottom-0 w-64 fixed left-0 top-16 z-[60] flex flex-col p-4 gap-2 transition-all duration-300">
+      <div class="flex items-center gap-3 px-2 py-4 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary"><span class="material-symbols-outlined">storefront</span></div>
+        <div>
+          <h2 class="text-lg font-black text-slate-900 leading-tight">Precision Retail</h2>
+          <p class="text-xs text-on-surface-variant opacity-70">Verified Merchant</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 space-y-1 overflow-y-auto no-scrollbar">
+        <p class="px-3 pt-1 pb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Main</p>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all rounded-lg" href="/">
+          <span class="material-symbols-outlined">inventory_2</span> Products
+        </a>
+        <a class="sidebar-link flex items-center justify-between px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all rounded-lg" href="/orders.html">
+          <span class="flex items-center gap-3"><span class="material-symbols-outlined">shopping_cart</span> Orders</span>
+          <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full min-w-[20px] text-center">142</span>
+        </a>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all rounded-lg" href="/customers.html">
+          <span class="material-symbols-outlined">group</span> Customers
+        </a>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all rounded-lg" href="/payments.html">
+          <span class="material-symbols-outlined">payments</span> Payments
+        </a>
+
+        <div class="pt-4 pb-1"><p class="px-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Insights</p></div>
+        <a class="sidebar-link flex items-center gap-3 px-3 py-2 bg-slate-200 text-slate-900 rounded-lg active" href="/analytics.html">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span> Analytics
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-0 md:ml-64 p-4 md:p-8 min-h-screen">
+      <div class="max-w-[1400px] mx-auto">
+
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 animate-fade-in">
+          <div>
+            <nav class="flex items-center gap-2 text-xs text-on-surface-variant mb-2">
+              <span class="hover:underline cursor-pointer hover:text-on-surface transition-colors">Insights</span>
+              <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+              <span class="font-semibold text-on-surface">Analytics</span>
+            </nav>
+            <h1 class="text-3xl font-extrabold tracking-tight text-on-surface mb-1">Analytics Dashboard</h1>
+            <p class="text-on-surface-variant font-medium">Track your store performance and revenue insights.</p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant/30 text-on-surface text-sm font-semibold rounded-lg hover:bg-surface-container transition-colors">
+              <span class="material-symbols-outlined text-lg">calendar_month</span> Last 30 Days
+              <span class="material-symbols-outlined text-lg">expand_more</span>
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary text-sm font-semibold rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
+              <span class="material-symbols-outlined text-lg">file_download</span> Export Report
+            </button>
+          </div>
+        </div>
+
+        <!-- Revenue KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow animate-slide-up" style="animation-delay:.05s">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-emerald-50 rounded-lg"><span class="material-symbols-outlined text-emerald-600">attach_money</span></div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">+18.2%</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Total Revenue</p>
+            <h3 class="text-2xl font-black tnum">$128,430</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-[82%]"></div></div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow animate-slide-up" style="animation-delay:.1s">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-blue-50 rounded-lg"><span class="material-symbols-outlined text-blue-600">trending_up</span></div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">+5.4%</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Conversion Rate</p>
+            <h3 class="text-2xl font-black tnum">3.24%</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden"><div class="bg-blue-500 h-full w-[65%]"></div></div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow animate-slide-up" style="animation-delay:.15s">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-violet-50 rounded-lg"><span class="material-symbols-outlined text-violet-600">visibility</span></div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-violet-700 bg-violet-100 px-2 py-0.5 rounded-full">+22.1%</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Page Views</p>
+            <h3 class="text-2xl font-black tnum">84,291</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden"><div class="bg-violet-500 h-full w-[72%]"></div></div>
+          </div>
+          <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow animate-slide-up" style="animation-delay:.2s">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-amber-50 rounded-lg"><span class="material-symbols-outlined text-amber-600">shopping_basket</span></div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">+8.7%</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-1">Avg. Order Value</p>
+            <h3 class="text-2xl font-black tnum">$67.40</h3>
+            <div class="w-full bg-surface-container h-1 mt-4 rounded-full overflow-hidden"><div class="bg-amber-500 h-full w-[55%]"></div></div>
+          </div>
+        </div>
+
+        <!-- Revenue Chart + Traffic Sources -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <!-- Revenue Chart -->
+          <div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-sm animate-slide-up" style="animation-delay:.25s">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-sm font-bold text-on-surface">Revenue Overview</h3>
+                <p class="text-xs text-on-surface-variant mt-0.5">Monthly revenue trend for the past 12 months</p>
+              </div>
+              <div class="flex items-center gap-4 text-xs">
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> Revenue</span>
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Profit</span>
+              </div>
+            </div>
+            <!-- CSS Bar Chart -->
+            <div class="flex items-end gap-2 h-48 px-2">
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:45%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:25%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Jan</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:55%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:30%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Feb</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:40%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:20%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Mar</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:65%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:38%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Apr</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:58%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:32%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">May</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:72%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:42%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Jun</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:68%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:40%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Jul</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:80%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:48%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Aug</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:75%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:44%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Sep</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/80 bar" style="height:90%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/60 bar" style="height:55%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1 font-bold text-on-surface">Oct</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/20 bar" style="height:85%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/20 bar" style="height:50%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Nov</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-1">
+                <div class="w-full rounded-t-md bg-primary/20 bar" style="height:95%"></div>
+                <div class="w-full rounded-t-md bg-emerald-400/20 bar" style="height:58%"></div>
+                <span class="text-[10px] text-on-surface-variant mt-1">Dec</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Traffic Sources -->
+          <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm animate-slide-up" style="animation-delay:.3s">
+            <h3 class="text-sm font-bold text-on-surface mb-1">Traffic Sources</h3>
+            <p class="text-xs text-on-surface-variant mb-6">Where your visitors come from</p>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between mb-1.5"><span class="text-xs font-semibold">Direct</span><span class="text-xs font-bold tnum">34.2%</span></div>
+                <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-primary h-full rounded-full" style="width:34.2%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1.5"><span class="text-xs font-semibold">Organic Search</span><span class="text-xs font-bold tnum">28.7%</span></div>
+                <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full rounded-full" style="width:28.7%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1.5"><span class="text-xs font-semibold">Social Media</span><span class="text-xs font-bold tnum">19.5%</span></div>
+                <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-violet-500 h-full rounded-full" style="width:19.5%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1.5"><span class="text-xs font-semibold">Email Campaigns</span><span class="text-xs font-bold tnum">11.3%</span></div>
+                <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-amber-500 h-full rounded-full" style="width:11.3%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1.5"><span class="text-xs font-semibold">Referral</span><span class="text-xs font-bold tnum">6.3%</span></div>
+                <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-rose-400 h-full rounded-full" style="width:6.3%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Products + Recent Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <!-- Top Products -->
+          <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden animate-slide-up" style="animation-delay:.35s">
+            <div class="p-6 pb-4">
+              <h3 class="text-sm font-bold text-on-surface">Top Selling Products</h3>
+              <p class="text-xs text-on-surface-variant mt-0.5">Best performers this month</p>
+            </div>
+            <div class="w-full overflow-x-auto"><table class="w-full">
+              <thead>
+                <tr class="bg-surface-container-low/50">
+                  <th class="px-6 py-3 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant text-left">Product</th>
+                  <th class="px-6 py-3 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant text-right">Units</th>
+                  <th class="px-6 py-3 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant text-right">Revenue</th>
+                  <th class="px-6 py-3 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant text-right">Growth</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-surface-variant/30">
+                <tr class="hover:bg-surface-container-high/30 transition-colors">
+                  <td class="px-6 py-4 flex items-center gap-3">
+                    <img src="/images/macbook.png" class="w-8 h-8 rounded-lg object-cover border border-slate-100" alt="MacBook" />
+                    <span class="text-sm font-semibold">MacBook Pro 14"</span>
+                  </td>
+                  <td class="px-6 py-4 text-sm font-bold tnum text-right">1,248</td>
+                  <td class="px-6 py-4 text-sm font-bold tnum text-right">$49,920</td>
+                  <td class="px-6 py-4 text-right"><span class="text-xs font-bold text-emerald-600">+24.5%</span></td>
+                </tr>
+                <tr class="hover:bg-surface-container-high/30 transition-colors">
+                  <td class="px-6 py-4 flex items-center gap-3">
+                    <img src="/images/headphones.png" class="w-8 h-8 rounded-lg object-cover border border-slate-100" alt="Headphones" />
+                    <span class="text-sm font-semibold">Velociti Headphones</span>
+                  </td>
+                  <td class="px-6 py-4 text-sm font-bold tnum text-right">892</td>
+                  <td class="px-6 py-4 text-sm font-bold tnum text-right">$26,760</td>
+                  <td class="px-6 py-4 text-right"><span class="text-xs font-bold text-emerald-600">+12.3%</span></td>
+                </tr>
+                <tr class="hover:bg-surface-container-high/30 transition-colors">
+                  <td class="px-6 py-4 flex items-center gap-3">
+                    <img src="/images/shoe.png" class="w-8 h-8 rounded-lg object-cover border border-slate-100" alt="Shoe" />
+                    <span class="text-sm font-semibold">Runner Pro X</span>
+                  </td>
+                  <td class="px-6 py-4 text-sm font-bold tnum text-right">654</td>
+                  <td class="px-6 py-4 text-sm font-bold tnum text-right">$18,312</td>
+                  <td class="px-6 py-4 text-right"><span class="text-xs font-bold text-emerald-600">+8.1%</span></td>
+                </tr>
+                <tr class="hover:bg-surface-container-high/30 transition-colors">
+                  <td class="px-6 py-4 flex items-center gap-3">
+                    <img src="/images/journal.png" class="w-8 h-8 rounded-lg object-cover border border-slate-100" alt="Journal" />
+                    <span class="text-sm font-semibold">Leather Journal</span>
+                  </td>
+                  <td class="px-6 py-4 text-sm font-bold tnum text-right">421</td>
+                  <td class="px-6 py-4 text-sm font-bold tnum text-right">$8,420</td>
+                  <td class="px-6 py-4 text-right"><span class="text-xs font-bold text-red-500">-3.2%</span></td>
+                </tr>
+              </tbody>
+            </table></div>
+          </div>
+
+          <!-- Real-time Activity -->
+          <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm animate-slide-up" style="animation-delay:.4s">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-sm font-bold text-on-surface">Live Activity Feed</h3>
+                <p class="text-xs text-on-surface-variant mt-0.5">Real-time store events</p>
+              </div>
+              <span class="flex items-center gap-1.5 text-[10px] font-bold text-emerald-600"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Live</span>
+            </div>
+            <div class="space-y-4">
+              <div class="flex gap-3 p-3 bg-surface-container-low/50 rounded-xl hover:bg-surface-container-high/40 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-emerald-600 text-lg">shopping_cart</span></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-semibold text-on-surface">New order <span class="font-bold text-primary">#ORD-9422</span></p>
+                  <p class="text-[11px] text-on-surface-variant truncate">MacBook Pro 14" — $1,299.00</p>
+                </div>
+                <span class="text-[10px] text-on-surface-variant flex-shrink-0">2m ago</span>
+              </div>
+              <div class="flex gap-3 p-3 bg-surface-container-low/50 rounded-xl hover:bg-surface-container-high/40 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-blue-600 text-lg">person_add</span></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-semibold text-on-surface">New customer registered</p>
+                  <p class="text-[11px] text-on-surface-variant truncate">james.wilson@proton.me</p>
+                </div>
+                <span class="text-[10px] text-on-surface-variant flex-shrink-0">8m ago</span>
+              </div>
+              <div class="flex gap-3 p-3 bg-surface-container-low/50 rounded-xl hover:bg-surface-container-high/40 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-amber-600 text-lg">star</span></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-semibold text-on-surface">New 5-star review</p>
+                  <p class="text-[11px] text-on-surface-variant truncate">Velociti Headphones — "Amazing sound quality!"</p>
+                </div>
+                <span class="text-[10px] text-on-surface-variant flex-shrink-0">15m ago</span>
+              </div>
+              <div class="flex gap-3 p-3 bg-surface-container-low/50 rounded-xl hover:bg-surface-container-high/40 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-violet-600 text-lg">local_shipping</span></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-semibold text-on-surface">Order <span class="font-bold text-primary">#ORD-9418</span> shipped</p>
+                  <p class="text-[11px] text-on-surface-variant truncate">Tracking: FX-2847291 via FedEx</p>
+                </div>
+                <span class="text-[10px] text-on-surface-variant flex-shrink-0">32m ago</span>
+              </div>
+              <div class="flex gap-3 p-3 bg-surface-container-low/50 rounded-xl hover:bg-surface-container-high/40 transition-colors">
+                <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-rose-600 text-lg">inventory</span></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-semibold text-on-surface">Low stock alert</p>
+                  <p class="text-[11px] text-on-surface-variant truncate">Runner Pro X — Only 4 units left</p>
+                </div>
+                <span class="text-[10px] text-on-surface-variant flex-shrink-0">1h ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geography + Device Breakdown -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-sm animate-slide-up" style="animation-delay:.45s">
+            <h3 class="text-sm font-bold text-on-surface mb-1">Sales by Region</h3>
+            <p class="text-xs text-on-surface-variant mb-6">Geographic distribution of orders</p>
+            <div class="space-y-3">
+              <div class="flex items-center gap-4">
+                <span class="text-lg">🇺🇸</span>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1"><span class="text-xs font-semibold">United States</span><span class="text-xs font-bold tnum">$52,340 <span class="text-on-surface-variant font-normal">(40.8%)</span></span></div>
+                  <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-blue-500 h-full rounded-full" style="width:40.8%"></div></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-lg">🇬🇧</span>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1"><span class="text-xs font-semibold">United Kingdom</span><span class="text-xs font-bold tnum">$24,710 <span class="text-on-surface-variant font-normal">(19.2%)</span></span></div>
+                  <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-indigo-500 h-full rounded-full" style="width:19.2%"></div></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-lg">🇩🇪</span>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1"><span class="text-xs font-semibold">Germany</span><span class="text-xs font-bold tnum">$18,980 <span class="text-on-surface-variant font-normal">(14.8%)</span></span></div>
+                  <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-violet-500 h-full rounded-full" style="width:14.8%"></div></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-lg">🇹🇷</span>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1"><span class="text-xs font-semibold">Turkey</span><span class="text-xs font-bold tnum">$15,420 <span class="text-on-surface-variant font-normal">(12.0%)</span></span></div>
+                  <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-red-400 h-full rounded-full" style="width:12%"></div></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-lg">🇯🇵</span>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1"><span class="text-xs font-semibold">Japan</span><span class="text-xs font-bold tnum">$10,280 <span class="text-on-surface-variant font-normal">(8.0%)</span></span></div>
+                  <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-rose-400 h-full rounded-full" style="width:8%"></div></div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-lg">🌍</span>
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1"><span class="text-xs font-semibold">Other</span><span class="text-xs font-bold tnum">$6,700 <span class="text-on-surface-variant font-normal">(5.2%)</span></span></div>
+                  <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden"><div class="bg-slate-400 h-full rounded-full" style="width:5.2%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Device Breakdown -->
+          <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm animate-slide-up" style="animation-delay:.5s">
+            <h3 class="text-sm font-bold text-on-surface mb-1">Device Breakdown</h3>
+            <p class="text-xs text-on-surface-variant mb-6">How customers browse your store</p>
+            <div class="space-y-5">
+              <div class="flex items-center gap-4 p-3 bg-surface-container-low/50 rounded-xl">
+                <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center"><span class="material-symbols-outlined text-blue-600">smartphone</span></div>
+                <div class="flex-1">
+                  <p class="text-xs font-bold">Mobile</p>
+                  <div class="w-full bg-surface-container h-1.5 mt-1 rounded-full overflow-hidden"><div class="bg-blue-500 h-full rounded-full" style="width:58%"></div></div>
+                </div>
+                <span class="text-sm font-black tnum">58%</span>
+              </div>
+              <div class="flex items-center gap-4 p-3 bg-surface-container-low/50 rounded-xl">
+                <div class="w-10 h-10 rounded-lg bg-violet-50 flex items-center justify-center"><span class="material-symbols-outlined text-violet-600">laptop_mac</span></div>
+                <div class="flex-1">
+                  <p class="text-xs font-bold">Desktop</p>
+                  <div class="w-full bg-surface-container h-1.5 mt-1 rounded-full overflow-hidden"><div class="bg-violet-500 h-full rounded-full" style="width:32%"></div></div>
+                </div>
+                <span class="text-sm font-black tnum">32%</span>
+              </div>
+              <div class="flex items-center gap-4 p-3 bg-surface-container-low/50 rounded-xl">
+                <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center"><span class="material-symbols-outlined text-amber-600">tablet_mac</span></div>
+                <div class="flex-1">
+                  <p class="text-xs font-bold">Tablet</p>
+                  <div class="w-full bg-surface-container h-1.5 mt-1 rounded-full overflow-hidden"><div class="bg-amber-500 h-full rounded-full" style="width:10%"></div></div>
+                </div>
+                <span class="text-sm font-black tnum">10%</span>
+              </div>
+            </div>
+            <div class="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10">
+              <p class="text-[11px] font-bold text-primary flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">tips_and_updates</span> Insight
+              </p>
+              <p class="text-[11px] text-on-surface-variant mt-1">Mobile traffic increased 12% this month. Consider optimizing your mobile checkout flow.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container" class="fixed top-20 right-6 z-[100] space-y-3 pointer-events-none"></div>
+  <script type="module" src="/src/orders.js"></script>
+</body>
+</html>
