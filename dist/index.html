@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Add New Product | Precision Retail</title>
+  <meta name="description" content="SellerCentral - Add and manage your products with Precision Retail's powerful inventory management dashboard." />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-on-surface": "#eff1f3",
+            "tertiary-container": "#002113",
+            "secondary-container": "#d0e1fb",
+            "surface": "#f7f9fb",
+            "surface-bright": "#f7f9fb",
+            "surface-container-highest": "#e0e3e5",
+            "on-tertiary-fixed-variant": "#005236",
+            "outline": "#76777d",
+            "primary-fixed-dim": "#b8c4ff",
+            "on-tertiary-fixed": "#002113",
+            "surface-container-high": "#e6e8ea",
+            "surface-container-low": "#f2f4f6",
+            "on-secondary-container": "#54647a",
+            "background": "#f7f9fb",
+            "on-primary-fixed-variant": "#173bab",
+            "surface-variant": "#e0e3e5",
+            "secondary": "#505f76",
+            "on-surface-variant": "#45464d",
+            "secondary-fixed": "#d3e4fe",
+            "primary-fixed": "#dde1ff",
+            "on-error-container": "#93000a",
+            "on-primary-fixed": "#001453",
+            "on-secondary-fixed-variant": "#38485d",
+            "tertiary": "#000000",
+            "error-container": "#ffdad6",
+            "primary": "#000000",
+            "primary-container": "#001453",
+            "surface-tint": "#3755c3",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed-dim": "#4edea3",
+            "secondary-fixed-dim": "#b7c8e1",
+            "inverse-surface": "#2d3133",
+            "on-error": "#ffffff",
+            "on-surface": "#191c1e",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff",
+            "surface-dim": "#d8dadc",
+            "inverse-primary": "#b8c4ff",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#6ffbbe",
+            "on-background": "#191c1e",
+            "outline-variant": "#c6c6cd",
+            "on-primary-container": "#607cec",
+            "on-tertiary-container": "#009668",
+            "on-secondary-fixed": "#0b1c30",
+            "surface-container": "#eceef0",
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
+          },
+          fontFamily: {
+            headline: ["Inter"],
+            body: ["Inter"],
+            label: ["Inter"],
+          },
+        },
+      },
+    };
+  </script>
+  <script type="module" crossorigin src="/assets/main-MqkxgLJS.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/guidora-playground-zOxPxe7P.js">
+  <link rel="stylesheet" crossorigin href="/assets/guidora-playground-ZzJmJtV4.css">
+</head>
+<body class="overflow-x-hidden bg-surface text-on-surface antialiased">
+
+  <!-- TopNavBar -->
+  <header id="top-navbar" class="bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-md text-slate-900 dark:text-slate-50 font-inter antialiased shadow-sm dark:shadow-none sticky top-0 z-50 flex justify-between items-center h-16 px-4 md:px-6 w-full transition-all duration-300">
+    <div class="flex items-center gap-3 md:gap-8">
+      <button id="mobile-menu-btn" class="md:hidden p-2 -ml-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <span class="text-lg md:text-xl font-bold tracking-tighter text-slate-900 dark:text-white cursor-pointer hover:opacity-80 transition-opacity">SellerCentral</span>
+      <div class="hidden md:flex items-center gap-1">
+        <a id="nav-inventory" class="nav-link text-slate-950 dark:text-white font-semibold border-b-2 border-slate-900 dark:border-white px-3 py-2" href="#">Inventory</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <!-- SideNavBar -->
+    <aside id="sidebar" class="sidebar bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-inter text-sm font-medium bottom-0 w-64 fixed left-0 top-16 z-[60] flex flex-col p-4 gap-2 transition-all duration-300">
+      <div class="flex items-center gap-3 px-2 py-4 mb-4">
+        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary store-icon">
+          <span class="material-symbols-outlined">storefront</span>
+        </div>
+        <div>
+          <h2 class="text-lg font-black text-slate-900 dark:text-white leading-tight">Precision Retail</h2>
+          <p class="text-xs text-on-surface-variant opacity-70">Verified Merchant</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 space-y-1 overflow-y-auto no-scrollbar">
+        <p class="px-3 pt-1 pb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Main</p>
+        <a id="side-products" class="sidebar-link flex items-center gap-3 px-3 py-2 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg active" href="/">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span> Products
+        </a>
+        <a id="side-orders" class="sidebar-link flex items-center justify-between px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg" href="/orders.html">
+          <span class="flex items-center gap-3"><span class="material-symbols-outlined">shopping_cart</span> Orders</span>
+          <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full min-w-[20px] text-center">142</span>
+        </a>
+        <a id="side-customers" class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg" href="/customers.html">
+          <span class="material-symbols-outlined">group</span> Customers
+        </a>
+        <a id="side-payments" class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg" href="/payments.html">
+          <span class="material-symbols-outlined">payments</span> Payments
+        </a>
+
+        <div class="pt-4 pb-1">
+          <p class="px-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Insights</p>
+        </div>
+        <a id="side-analytics" class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg" href="/analytics.html">
+          <span class="material-symbols-outlined">monitoring</span> Analytics
+        </a>
+      </nav>
+
+
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="flex-1 ml-0 md:ml-64 p-4 md:p-8 min-h-screen">
+      <!-- Header Section -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8 animate-fade-in">
+        <div>
+          <nav class="flex items-center gap-2 text-xs text-on-surface-variant mb-2">
+            <span class="hover:underline cursor-pointer hover:text-on-surface transition-colors">Inventory</span>
+            <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+            <span class="hover:underline cursor-pointer hover:text-on-surface transition-colors">Products</span>
+            <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+            <span class="font-semibold text-on-surface">Add New Product</span>
+          </nav>
+          <h1 class="text-3xl font-black tracking-tight text-on-surface">Add New Product</h1>
+        </div>
+        <div class="flex gap-3">
+          <button id="btn-discard" class="px-6 py-2 rounded-lg font-semibold text-sm bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:scale-[0.97]">
+            Discard Draft
+          </button>
+          <button id="btn-publish" class="px-6 py-2 rounded-lg font-semibold text-sm bg-primary text-on-primary hover:opacity-90 transition-all duration-200 flex items-center gap-2 shadow-lg shadow-primary/10 hover:shadow-xl hover:shadow-primary/20 active:scale-[0.97]">
+            <span class="material-symbols-outlined text-sm">rocket_launch</span> Publish Product
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-8">
+        <!-- Left Column (Form) -->
+        <div class="lg:col-span-2 space-y-8">
+
+          <!-- General Information -->
+          <section id="section-general" class="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.05s;">
+            <div class="flex items-center gap-2 mb-6">
+              <span class="material-symbols-outlined text-primary-container">info</span>
+              <h3 class="text-lg font-bold">General Information</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="md:col-span-2">
+                <label for="product-title" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Product Title</label>
+                <input id="product-title" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="e.g., Ultra-Thin 15.6-inch Professional Laptop" type="text" />
+              </div>
+              <div class="md:col-span-2">
+                <label for="product-subtitle" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Product Subtitle</label>
+                <input id="product-subtitle" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="A brief hook for product listings" type="text" />
+              </div>
+              <div>
+                <label for="product-sku" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">SKU (Stock Keeping Unit)</label>
+                <input id="product-sku" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="PR-LT-001" type="text" />
+              </div>
+              <div>
+                <label for="product-brand" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Brand</label>
+                <select id="product-brand" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-surface-tint appearance-none transition-all duration-200">
+                  <option value="">Select Brand</option>
+                  <option value="techcorp">TechCorp</option>
+                  <option value="luxehome">LuxeHome</option>
+                </select>
+              </div>
+              <div class="md:col-span-2">
+                <label for="product-description" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Description</label>
+                <div class="bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/10">
+                  <div class="flex items-center gap-1 px-4 py-2 bg-surface-container-high border-b border-outline-variant/10">
+                    <button class="editor-btn p-1 rounded hover:bg-surface-container-highest transition-colors" title="Bold">
+                      <span class="material-symbols-outlined text-sm">format_bold</span>
+                    </button>
+                    <button class="editor-btn p-1 rounded hover:bg-surface-container-highest transition-colors" title="Italic">
+                      <span class="material-symbols-outlined text-sm">format_italic</span>
+                    </button>
+                    <button class="editor-btn p-1 rounded hover:bg-surface-container-highest transition-colors" title="Bullet List">
+                      <span class="material-symbols-outlined text-sm">format_list_bulleted</span>
+                    </button>
+                    <button class="editor-btn p-1 rounded hover:bg-surface-container-highest transition-colors" title="Link">
+                      <span class="material-symbols-outlined text-sm">link</span>
+                    </button>
+                    <button class="editor-btn p-1 rounded hover:bg-surface-container-highest transition-colors" title="Image">
+                      <span class="material-symbols-outlined text-sm">image</span>
+                    </button>
+                  </div>
+                  <textarea id="product-description" class="w-full bg-transparent border-none p-4 text-sm focus:ring-0 focus:outline-none resize-none" placeholder="Provide detailed product features, benefits, and technical specifications..." rows="6"></textarea>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Media & Assets -->
+          <section id="section-media" class="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="flex items-center gap-2 mb-6">
+              <span class="material-symbols-outlined text-primary-container">image</span>
+              <h3 class="text-lg font-bold">Media &amp; Assets</h3>
+            </div>
+            <div class="space-y-6">
+              <!-- Drop zone -->
+              <div id="drop-zone" class="border-2 border-dashed border-outline-variant rounded-xl p-12 text-center hover:border-surface-tint transition-all duration-300 cursor-pointer group">
+                <div class="w-16 h-16 bg-surface-container-low rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-primary-fixed transition-all duration-300">
+                  <span class="material-symbols-outlined text-3xl text-surface-tint">cloud_upload</span>
+                </div>
+                <p class="text-sm font-semibold mb-1">Drag and drop your product images</p>
+                <p class="text-xs text-on-surface-variant">JPG, PNG or WEBP up to 5MB (Min 1200x1200px recommended)</p>
+              </div>
+
+              <!-- Image thumbnails -->
+              <div class="grid grid-cols-4 md:grid-cols-6 gap-4">
+                <div class="relative group aspect-square rounded-lg overflow-hidden border-2 border-primary ring-2 ring-primary ring-offset-2">
+                  <img class="w-full h-full object-cover" alt="Product primary image - laptop on desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyQgCsvcN9yT1bHT59JrrZru610D2UPO3KKB6w7TI8H0wAOQRsQEiUzPP6J93FubcvUoyJReSCzQnusOCCK-zY78CtR_iRNb0sKRjBCsP-q1RjEo39_s9TyS4wTMvSDcvga7jlJTFuJpmhK4vQgyyL0dDmAJuN2__oHiu3PAlhAcndyoe56Ap-tNpDELpxSsGYwFa-yl0_A4UMjnb3Ytv-qyIvLI4FjZ0zrZrGfaEYEpW5vrlrsp8gEvvqTyFBHeUhvxJgvRgApao" />
+                  <div class="absolute top-2 left-2 bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded uppercase">Primary</div>
+                  <button class="absolute top-2 right-2 p-1 bg-white/90 rounded text-error opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-white">
+                    <span class="material-symbols-outlined text-xs">delete</span>
+                  </button>
+                </div>
+                <div class="relative group aspect-square rounded-lg overflow-hidden bg-surface-container-low">
+                  <img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-200" alt="Product side view - laptop profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5Ur53ORvkLt2Q3e7JnObEtniU5GMqUyHCgnh-23tMV8KPTnX_dY0TQlbvckNhPN8rewYm_RlEORZkIO0yW3nL-pn7vm_NHxhJFxbLZ_VWCc7DheT-YrIQrTnrYlSVMsiiLiIsJ7_lxmoiChr0Fe_vQ-puH3K0pyBftpTAuoslpxsU6465PQstgRGmjmaWx9QqmuTqghzqYqRZ64e9L9W47qwkUsiNAuEBCDG8TjxlKI2YbeW9luNPId5gB9LFpZrmF9akVbgqCCI" />
+                  <button class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-all duration-200">
+                    <span class="text-white text-xs font-bold bg-black/40 px-2 py-1 rounded">Set Primary</span>
+                  </button>
+                </div>
+                <div id="btn-add-image" class="aspect-square rounded-lg bg-surface-container-low flex items-center justify-center text-outline-variant hover:bg-surface-container-high hover:text-surface-tint cursor-pointer transition-all duration-200">
+                  <span class="material-symbols-outlined">add</span>
+                </div>
+              </div>
+
+              <!-- Video URL -->
+              <div>
+                <label for="video-url" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Product Video URL</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">play_circle</span>
+                  <input id="video-url" class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-3 text-sm focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="Youtube or Vimeo link" type="text" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Category & Attributes -->
+          <section id="section-category" class="bg-surface-container-lowest p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.15s;">
+            <div class="flex items-center gap-2 mb-6">
+              <span class="material-symbols-outlined text-primary-container">list</span>
+              <h3 class="text-lg font-bold">Category &amp; Attributes</h3>
+            </div>
+            <div class="space-y-6">
+              <!-- Category tree -->
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Category Tree</label>
+                <div id="category-tree" class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1.5 bg-secondary-container text-on-secondary-container rounded-full text-xs font-medium flex items-center gap-2 transition-all duration-200 hover:shadow-sm">
+                    Electronics <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                  </span>
+                  <span class="px-3 py-1.5 bg-secondary-container text-on-secondary-container rounded-full text-xs font-medium flex items-center gap-2 transition-all duration-200 hover:shadow-sm">
+                    Computers <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                  </span>
+                  <button class="px-3 py-1.5 bg-primary text-on-primary rounded-full text-xs font-bold flex items-center gap-1 hover:opacity-90 transition-all duration-200 active:scale-95">
+                    Laptops <span class="material-symbols-outlined text-[14px]">close</span>
+                  </button>
+                  <button id="btn-change-category" class="px-3 py-1.5 border border-outline-variant text-on-surface-variant rounded-full text-xs font-medium hover:bg-surface-container-low hover:border-surface-tint transition-all duration-200">
+                    + Change Category
+                  </button>
+                </div>
+              </div>
+
+              <!-- Attribute fields -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-outline-variant/10">
+                <div>
+                  <label for="processor-type" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Processor Type</label>
+                  <input id="processor-type" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="e.g., Octa-Core M3 Max" type="text" />
+                </div>
+                <div>
+                  <label for="memory-ram" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Memory (RAM)</label>
+                  <select id="memory-ram" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-surface-tint appearance-none transition-all duration-200">
+                    <option value="8">8 GB</option>
+                    <option value="16">16 GB</option>
+                    <option value="32">32 GB</option>
+                    <option value="64">64 GB</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="storage-capacity" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Storage Capacity</label>
+                  <input id="storage-capacity" class="w-full bg-surface-container-low border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="e.g., 512GB SSD" type="text" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">Color Variant</label>
+                  <div id="color-picker" class="flex gap-2">
+                    <button class="color-swatch w-8 h-8 rounded-full bg-slate-800 ring-2 ring-primary ring-offset-2 transition-all duration-200 hover:scale-110 active" data-color="space-gray"></button>
+                    <button class="color-swatch w-8 h-8 rounded-full bg-slate-300 transition-all duration-200 hover:scale-110 hover:ring-2 hover:ring-slate-400 hover:ring-offset-2" data-color="silver"></button>
+                    <button class="color-swatch w-8 h-8 rounded-full bg-slate-100 border border-slate-200 transition-all duration-200 hover:scale-110 hover:ring-2 hover:ring-slate-300 hover:ring-offset-2" data-color="white"></button>
+                    <button id="btn-add-color" class="w-8 h-8 rounded-full flex items-center justify-center border border-dashed border-outline-variant hover:border-surface-tint hover:bg-surface-container-low transition-all duration-200">
+                      <span class="material-symbols-outlined text-xs">add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right Column (Settings & Preview) -->
+        <div class="space-y-8">
+
+          <!-- Pricing & Inventory -->
+          <section id="section-pricing" class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.08s;">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-container">payments</span>
+                <h3 class="text-md font-bold">Pricing &amp; Stock</h3>
+              </div>
+              <span class="text-[10px] bg-tertiary-fixed text-on-tertiary-fixed-variant px-1.5 py-0.5 rounded font-black uppercase animate-pulse">Live Calc</span>
+            </div>
+            <div class="space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="base-price" class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Base Price</label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant">$</span>
+                    <input id="base-price" class="w-full bg-surface-container-low border-none rounded-lg pl-7 pr-3 py-2 text-sm font-bold focus:ring-2 focus:ring-surface-tint transition-all duration-200" type="number" value="1299.00" />
+                  </div>
+                </div>
+                <div>
+                  <label for="sale-price" class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Sale Price</label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant">$</span>
+                    <input id="sale-price" class="w-full bg-surface-container-low border-none rounded-lg pl-7 pr-3 py-2 text-sm focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="Optional" type="number" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Profit Calculator -->
+              <div id="profit-calculator" class="bg-surface-container-high rounded-lg p-4 space-y-2 transition-all duration-300">
+                <div class="flex justify-between text-xs">
+                  <span class="text-on-surface-variant">Cost of Goods:</span>
+                  <span id="cost-of-goods" class="font-bold text-on-surface">$850.00</span>
+                </div>
+                <div class="flex justify-between text-xs">
+                  <span class="text-on-surface-variant">Platform Fee (15%):</span>
+                  <span id="platform-fee" class="font-bold text-error">-$194.85</span>
+                </div>
+                <div class="pt-2 border-t border-outline-variant/20 flex justify-between">
+                  <span class="text-xs font-bold">Projected Net Profit:</span>
+                  <span id="net-profit" class="text-sm font-black text-on-tertiary-container">$254.15</span>
+                </div>
+              </div>
+
+              <!-- Stock -->
+              <div>
+                <label for="warehouse-stock" class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Warehouse Stock</label>
+                <div class="flex items-center gap-3">
+                  <input id="warehouse-stock" class="flex-1 bg-surface-container-low border-none rounded-lg px-3 py-2 text-sm font-bold focus:ring-2 focus:ring-surface-tint transition-all duration-200" type="number" value="48" />
+                  <button id="btn-stock-history" class="p-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors" title="View stock history">
+                    <span class="material-symbols-outlined text-sm">history</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Low Stock Alert -->
+              <div class="flex items-center justify-between p-3 rounded-lg bg-error-container/20 border border-error/10">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-error text-lg">warning</span>
+                  <div class="leading-tight">
+                    <p class="text-[10px] font-bold text-error uppercase">Low Stock Alert</p>
+                    <p class="text-xs font-medium">Notify when stock &lt; 5</p>
+                  </div>
+                </div>
+                <button id="toggle-low-stock" class="h-5 w-10 bg-error rounded-full relative cursor-pointer transition-colors duration-300" data-active="true">
+                  <div class="toggle-dot absolute right-1 top-1 w-3 h-3 bg-white rounded-full transition-all duration-300"></div>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Shipping & Logistics -->
+          <section id="section-logistics" class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.12s;">
+            <div class="flex items-center gap-2 mb-6">
+              <span class="material-symbols-outlined text-primary-container">local_shipping</span>
+              <h3 class="text-md font-bold">Logistics</h3>
+            </div>
+            <div class="space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="weight" class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Weight (kg)</label>
+                  <input id="weight" class="w-full bg-surface-container-low border-none rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-surface-tint transition-all duration-200" type="number" value="1.4" />
+                </div>
+                <div>
+                  <label for="packaging" class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Packaging</label>
+                  <select id="packaging" class="w-full bg-surface-container-low border-none rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-surface-tint appearance-none transition-all duration-200">
+                    <option>Box - Medium</option>
+                    <option>Envelope</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Dimensions (cm)</label>
+                <div class="flex gap-2">
+                  <input id="dim-length" class="w-full bg-surface-container-low border-none rounded-lg px-3 py-2 text-sm text-center focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="L" type="text" />
+                  <input id="dim-width" class="w-full bg-surface-container-low border-none rounded-lg px-3 py-2 text-sm text-center focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="W" type="text" />
+                  <input id="dim-height" class="w-full bg-surface-container-low border-none rounded-lg px-3 py-2 text-sm text-center focus:ring-2 focus:ring-surface-tint transition-all duration-200" placeholder="H" type="text" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SEO & Marketing -->
+          <section id="section-seo" class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.16s;">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="material-symbols-outlined text-primary-container">travel_explore</span>
+              <h3 class="text-md font-bold">Search Optimization</h3>
+            </div>
+            <div class="space-y-4">
+              <!-- SEO Preview -->
+              <div id="seo-preview" class="bg-surface-container-low p-4 rounded-lg transition-all duration-300 hover:shadow-sm">
+                <p id="seo-title-preview" class="text-xs text-[#1a0dab] font-medium leading-tight mb-1">Ultra-Thin 15.6-inch Professional Laptop | TechCorp</p>
+                <p id="seo-url-preview" class="text-[10px] text-[#006621] truncate mb-1">precisionretail.com &gt; laptops &gt; ultrathin-pro-15</p>
+                <p id="seo-desc-preview" class="text-[10px] text-on-surface-variant leading-tight">High-performance laptop featuring Octa-core processor, 16GB RAM and stunning retina display. Perfect for professionals...</p>
+              </div>
+              <div>
+                <label for="url-slug" class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">URL Slug</label>
+                <input id="url-slug" class="w-full bg-surface-container-low border-none rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-surface-tint transition-all duration-200" type="text" value="ultrathin-pro-15" />
+              </div>
+            </div>
+          </section>
+
+          <!-- Documents / Compliance -->
+          <section id="section-documents" class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="flex items-center gap-2 mb-4">
+              <span class="material-symbols-outlined text-primary-container">description</span>
+              <h3 class="text-md font-bold">Documents</h3>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg group hover:bg-surface-container-high transition-colors duration-200">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-on-surface-variant">picture_as_pdf</span>
+                  <span class="text-xs font-medium">Warranty_Info.pdf</span>
+                </div>
+                <button class="material-symbols-outlined text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-all duration-200 hover:text-error">close</button>
+              </div>
+              <button id="btn-add-document" class="w-full py-2 border-2 border-dashed border-outline-variant rounded-lg text-xs font-bold text-on-surface-variant hover:bg-surface-container-low hover:border-surface-tint transition-all duration-200">
+                + Add Certificate/Manual
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Global FAB for quick save -->
+  <button id="fab-save" class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-200 z-50 group">
+    <span class="material-symbols-outlined group-hover:rotate-12 transition-transform duration-200">save</span>
+  </button>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-20 right-6 z-[100] space-y-3 pointer-events-none"></div>
+
+</body>
+</html>

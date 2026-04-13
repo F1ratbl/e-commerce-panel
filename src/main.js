@@ -1,4 +1,5 @@
 import './style.css';
+import { initGuidoraPlayground } from './guidora-playground.js';
 
 // ===== Toast Notification System =====
 function showToast(message, type = 'success') {
@@ -298,4 +299,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditorToolbar();
   initKeyboardShortcuts();
   initScrollProgress();
+  void initGuidoraPlayground();
 });
