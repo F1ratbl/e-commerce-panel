@@ -1,0 +1,7 @@
+:80 {
+	root * /srv
+	file_server
+	# SPA fallback
+	try_files {path} /index.html
+	encode gzip
+}

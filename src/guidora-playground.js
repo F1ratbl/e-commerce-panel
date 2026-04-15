@@ -1,5 +1,5 @@
 const DEFAULT_GUIDORA_SDK_CDN_URL =
-  "https://cdn.jsdelivr.net/npm/@guidora/sdk@0.1.0/dist/index.global.js";
+  "https://cdn.jsdelivr.net/npm/@guidora/sdk@latest/dist/index.global.js";
 const DEFAULT_GUIDORA_API_BASE_URL = "http://127.0.0.1:8000/api/guide";
 const DEFAULT_GUIDORA_PROXY_PREFIX = "/__guidora";
 const GUIDORA_LOCAL_SDK_ENTRY =
